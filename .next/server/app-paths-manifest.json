@@ -1,0 +1,16 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/alerts/page": "app/alerts/page.js",
+  "/api/followup/route": "app/api/followup/route.js",
+  "/api/followup/[id]/route": "app/api/followup/[id]/route.js",
+  "/analytics/page": "app/analytics/page.js",
+  "/api/voice/synthesize/route": "app/api/voice/synthesize/route.js",
+  "/api/voice/transcribe/route": "app/api/voice/transcribe/route.js",
+  "/page": "app/page.js",
+  "/followup/page": "app/followup/page.js",
+  "/tasks/page": "app/tasks/page.js",
+  "/appointments/page": "app/appointments/page.js",
+  "/patients/page": "app/patients/page.js",
+  "/assistant/page": "app/assistant/page.js",
+  "/settings/page": "app/settings/page.js"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "dentalai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered dental clinic assistant and multi-agent workflow platform",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:all": "node scripts/dev.mjs",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && python -m uvicorn main:app --reload --port 8000",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && echo 'Backend build complete'"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "dental",
+    "healthcare",
+    "ai",
+    "clinic",
+    "appointment",
+    "patient-management"
+  ],
+  "author": "DentalAI Team",
+  "license": "MIT"
+}

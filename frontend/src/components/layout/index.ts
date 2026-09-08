@@ -1,0 +1,1 @@
+export { DentistLayout } from './DentistLayout'

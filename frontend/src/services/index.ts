@@ -1,0 +1,5 @@
+export { apiClient, default } from './api'
+export type { ApiResponse, User, AuthResponse, Appointment } from './api'
+export { appointmentService } from './appointmentService'
+export { chatService } from './chatService'
+export { dentistService } from './dentistService'

@@ -1,0 +1,128 @@
+import { Appointment, PatientIntake } from "./types";
+import { mockPatients } from "./data";
+
+const createIntake = (patientId: string, concern: string, duration: string, pain: number, other: string): PatientIntake => ({
+  id: `intake-${patientId}`,
+  patientId,
+  patientConcern: concern,
+  duration,
+  painLevel: pain,
+  otherInformation: other,
+  symptoms: pain >= 7 ? ["Swelling", "Bleeding", "Difficulty eating"] : pain >= 4 ? ["Sensitivity", "Discomfort"] : ["Mild discomfort"],
+  medicalHistory: ["Annual checkups", "No major conditions"],
+  medications: ["Multivitamin"],
+  allergies: [],
+  conversationSummary: `Patient reported ${concern.toLowerCase()} for ${duration}. Pain level reported as ${pain}/10. ${other}`,
+  aiGeneratedSummary: `Based on the patient's intake form, they are experiencing ${concern.toLowerCase()} that has been ongoing for ${duration}. The reported pain level of ${pain}/10 suggests ${pain >= 7 ? "significant discomfort requiring prompt attention" : pain >= 4 ? "moderate discomfort that should be evaluated" : "mild symptoms that can be monitored"}. ${other} Recommended: ${pain >= 7 ? "Priority scheduling for examination and possible imaging" : "Schedule for routine evaluation during next available appointment"}.`,
+  timestamp: new Date(),
+});
+
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
+const nextWeek = new Date(today);
+nextWeek.setDate(nextWeek.getDate() + 7);
+
+export const mockAppointments: Appointment[] = [
+  {
+    id: "apt1",
+    patientId: "p1",
+    patient: mockPatients[0],
+    dateTime: new Date(today.setHours(9, 0, 0, 0)),
+    endTime: new Date(today.setHours(9, 45, 0, 0)),
+    type: "Routine Checkup",
+    status: "completed",
+    notes: "Regular 6-month checkup. All healthy.",
+    intake: createIntake("p1", "Routine visit", "N/A", 0, "No specific concerns. Just a regular checkup."),
+  },
+  {
+    id: "apt2",
+    patientId: "p2",
+    patient: mockPatients[1],
+    dateTime: new Date(new Date().setHours(10, 0, 0, 0)),
+    endTime: new Date(new Date().setHours(10, 30, 0, 0)),
+    type: "Tooth Pain Consultation",
+    status: "in-progress",
+    intake: createIntake("p2", "Severe tooth pain", "3 days", 8, "Pain worsens when chewing. Some swelling on right side."),
+  },
+  {
+    id: "apt3",
+    patientId: "p3",
+    patient: mockPatients[2],
+    dateTime: new Date(new Date().setHours(11, 0, 0, 0)),
+    endTime: new Date(new Date().setHours(11, 45, 0, 0)),
+    type: "Teeth Cleaning",
+    status: "scheduled",
+    intake: createIntake("p3", "Regular cleaning", "N/A", 1, "Request gentle cleaning. Previous cleaning caused sensitivity."),
+  },
+  {
+    id: "apt4",
+    patientId: "p4",
+    patient: mockPatients[3],
+    dateTime: new Date(new Date().setHours(13, 0, 0, 0)),
+    endTime: new Date(new Date().setHours(14, 0, 0, 0)),
+    type: "Crown Consultation",
+    status: "scheduled",
+    intake: createIntake("p4", "Crown evaluation", "1 week", 4, "Old filling needs replacement. Discussing crown options."),
+  },
+  {
+    id: "apt5",
+    patientId: "p5",
+    patient: mockPatients[4],
+    dateTime: new Date(new Date().setHours(14, 30, 0, 0)),
+    endTime: new Date(new Date().setHours(15, 15, 0, 0)),
+    type: "Whitening Consultation",
+    status: "scheduled",
+    intake: createIntake("p5", "Teeth whitening inquiry", "N/A", 0, "Interested in professional whitening. No current sensitivity."),
+  },
+  {
+    id: "apt6",
+    patientId: "p6",
+    patient: mockPatients[5],
+    dateTime: new Date(new Date().setHours(16, 0, 0, 0)),
+    endTime: new Date(new Date().setHours(16, 45, 0, 0)),
+    type: "Emergency Visit",
+    status: "scheduled",
+    intake: createIntake("p6", "Broken tooth", "2 hours", 6, "Tooth broke while eating. No visible fragments. Moderate pain."),
+  },
+  {
+    id: "apt7",
+    patientId: "p1",
+    patient: mockPatients[0],
+    dateTime: new Date(tomorrow.setHours(10, 0, 0, 0)),
+    endTime: new Date(tomorrow.setHours(10, 30, 0, 0)),
+    type: "Follow-up",
+    status: "scheduled",
+    intake: createIntake("p1", "Follow-up visit", "N/A", 2, "Check healing from previous procedure."),
+  },
+  {
+    id: "apt8",
+    patientId: "p3",
+    patient: mockPatients[2],
+    dateTime: new Date(tomorrow.setHours(14, 0, 0, 0)),
+    endTime: new Date(tomorrow.setHours(15, 0, 0, 0)),
+    type: "Root Canal",
+    status: "scheduled",
+    intake: createIntake("p3", "Root canal treatment", "1 week", 7, "Referred by Dr. Smith. Persistent infection in molar."),
+  },
+  {
+    id: "apt9",
+    patientId: "p2",
+    patient: mockPatients[1],
+    dateTime: new Date(nextWeek.setHours(9, 30, 0, 0)),
+    endTime: new Date(nextWeek.setHours(10, 30, 0, 0)),
+    type: "Extraction",
+    status: "scheduled",
+    intake: createIntake("p2", "Tooth extraction", "2 weeks", 5, "Wisdom tooth removal. Discussed sedation options."),
+  },
+  {
+    id: "apt10",
+    patientId: "p4",
+    patient: mockPatients[3],
+    dateTime: new Date(nextWeek.setHours(11, 0, 0, 0)),
+    endTime: new Date(nextWeek.setHours(12, 0, 0, 0)),
+    type: "Implant Consultation",
+    status: "scheduled",
+    intake: createIntake("p4", "Dental implant consultation", "1 month", 0, "Interested in implant for missing tooth #14. Review X-rays."),
+  },
+];
